@@ -24,10 +24,11 @@ export class MainComponent implements OnInit, AfterViewChecked {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadNotesFromStorage();
+  }
 
   ngAfterViewChecked(): void {
-    // Restore checkbox states in all note-content elements
     const noteDivs = document.querySelectorAll('.note-content');
     noteDivs.forEach(div => {
       const checkboxes = div.querySelectorAll('input[type="checkbox"]');
@@ -52,7 +53,6 @@ export class MainComponent implements OnInit, AfterViewChecked {
   }
 
   insertCheckbox(): void {
-    // Inline handler to maintain `checked` state
     document.execCommand(
       'insertHTML',
       false,
@@ -69,7 +69,6 @@ export class MainComponent implements OnInit, AfterViewChecked {
   onEditorInput(): void {
     const editor = this.editorRef.nativeElement;
     const checkboxes = editor.querySelectorAll('input[type="checkbox"]');
-
     checkboxes.forEach((box: HTMLInputElement) => {
       if (box.checked) {
         box.setAttribute('checked', '');
@@ -83,8 +82,6 @@ export class MainComponent implements OnInit, AfterViewChecked {
 
   addNote(): void {
     const editor = this.editorRef.nativeElement;
-
-    // Sync checkbox states
     const checkboxes = editor.querySelectorAll('input[type="checkbox"]');
     checkboxes.forEach((box: HTMLInputElement) => {
       if (box.checked) {
@@ -116,6 +113,7 @@ export class MainComponent implements OnInit, AfterViewChecked {
         });
       }
 
+      this.saveNotesToStorage(); // ✅ Save to local storage
       this.resetForm();
     }
   }
@@ -142,6 +140,7 @@ export class MainComponent implements OnInit, AfterViewChecked {
 
   deleteNote(index: number): void {
     this.notes.splice(index, 1);
+    this.saveNotesToStorage(); // ✅ Save to local storage after deletion
     this.resetForm();
   }
 
@@ -152,5 +151,18 @@ export class MainComponent implements OnInit, AfterViewChecked {
     this.isEditing = false;
     this.editingIndex = -1;
     this.isCheckedNote = false;
+  }
+
+  // ✅ Save notes to localStorage
+  saveNotesToStorage(): void {
+    localStorage.setItem('notes', JSON.stringify(this.notes));
+  }
+
+  // ✅ Load notes from localStorage
+  loadNotesFromStorage(): void {
+    const savedNotes = localStorage.getItem('notes');
+    if (savedNotes) {
+      this.notes = JSON.parse(savedNotes);
+    }
   }
 }
