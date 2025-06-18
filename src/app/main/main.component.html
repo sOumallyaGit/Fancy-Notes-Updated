@@ -1,0 +1,106 @@
+<div class="notes-container">
+  <h2>{{ isEditing ? 'Edit Note' : 'Add a New Note' }}</h2>
+
+  <!-- Note Form -->
+  <form (ngSubmit)="addNote()">
+    <!-- Title Input -->
+    <input
+      type="text"
+      placeholder="Note Title"
+      [(ngModel)]="noteTitle"
+      name="title"
+      class="note-title"
+      required
+      [readonly]="isEditing && isCheckedNote"
+    />
+
+    <!-- Formatting Toolbar -->
+    <div class="editor-toolbar">
+      <button type="button" (click)="formatText('bold')" title="Bold"><b>B</b></button>
+      <button type="button" (click)="formatText('italic')" title="Italic"><i>I</i></button>
+      <button type="button" (click)="formatText('underline')" title="Underline"><u>U</u></button>
+      <button type="button" (click)="formatText('strikeThrough')" title="Strikethrough"><s>S</s></button>
+      <button type="button" (click)="formatText('insertUnorderedList')" title="Bullet List">• List</button>
+      <button type="button" (click)="formatText('insertOrderedList')" title="Numbered List">1. List</button>
+      <button type="button" (click)="insertCheckbox()" title="Insert Checkbox">☑</button>
+
+      <select (change)="changeFontSize($event.target.value)">
+        <option value="">Font Size</option>
+        <option value="1">Tiny</option>
+        <option value="2">Small</option>
+        <option value="3">Normal</option>
+        <option value="4">Medium</option>
+        <option value="5">Large</option>
+        <option value="6">Huge</option>
+        <option value="7">Massive</option>
+      </select>
+    </div>
+
+    <!-- Rich Text Editor -->
+    <div
+      #editor
+      class="rich-editor"
+      dir="ltr"
+      [contentEditable]="!isEditing || !isCheckedNote"
+      [class.read-only]="isEditing && isCheckedNote"
+      (input)="onEditorInput()"
+    ></div>
+
+    <!-- Submit Button -->
+    <button
+      type="submit"
+      class="add-btn"
+      [disabled]="isEditing && isCheckedNote"
+    >
+      {{ isEditing ? 'Update Note' : 'Add Note' }}
+    </button>
+  </form>
+
+  <!-- Search Input -->
+  <input
+    type="text"
+    placeholder="Search notes..."
+    [(ngModel)]="searchText"
+    name="search"
+    class="search-input"
+  />
+
+  <!-- Notes List -->
+  <div *ngIf="filteredNotes.length > 0" class="notes-list">
+    <h3>Your Notes</h3>
+    <br />
+    <div
+      *ngFor="let note of filteredNotes; let i = index"
+      class="note-card"
+      [class.checked]="note.checked"
+    >
+      <h4>{{ note.title }}</h4>
+
+      <!-- Rendered note content -->
+      <div class="note-content" [innerHTML]="note.content"></div>
+
+      <!-- Note Actions -->
+      <div class="note-footer">
+        <div class="checkbox-wrapper">
+          <input
+            type="checkbox"
+            [(ngModel)]="note.checked"
+            [name]="'checked' + i"
+            [id]="'check' + i"
+          />
+          <label [for]="'check' + i"><h5>Mark as Done</h5></label>
+        </div>
+
+        <div class="note-card-buttons">
+          <button type="button" (click)="editNote(i)" [disabled]="note.checked">✏️ Edit</button>
+          <button type="button" (click)="deleteNote(i)">🗑️ Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="filteredNotes.length === 0" class="empty-message">
+    <p>No matching notes found.</p>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+/* app.component.css or global styles.css */
+.app-footer {
+  background: linear-gradient(90deg, #1abc9c, #2ecc71);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 1rem;
+  width: 100%;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

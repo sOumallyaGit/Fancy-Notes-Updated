@@ -1,0 +1,209 @@
+.notes-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Input Fields */
+.note-title,
+.search-input {
+  width: 100%;
+  padding: 10px 14px;
+  margin: 10px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Editor Toolbar */
+.editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.editor-toolbar button,
+.editor-toolbar select {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: none;
+  background-color: #eee;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.editor-toolbar button:hover,
+.editor-toolbar select:hover {
+  background-color: #ddd;
+}
+
+/* Rich Text Editor */
+.rich-editor {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-height: 200px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-family: sans-serif;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  background-color: #fff;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  direction: ltr;
+  text-align: left;
+  outline: none;
+}
+
+.read-only {
+  background-color: #f5f5f5 !important;
+  color: #555;
+  pointer-events: none;
+}
+
+/* Lists */
+.rich-editor ul,
+.rich-editor ol {
+  margin: 10px 0;
+  padding-left: 24px;
+  list-style-position: outside;
+}
+
+.rich-editor li {
+  margin-bottom: 6px;
+}
+
+/* Inline checkbox style */
+.custom-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* Add Button */
+.add-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-btn:hover {
+  background-color: #218838;
+}
+
+.add-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Notes Grid */
+.notes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* Note Card */
+.note-card {
+  background: #fdfdfd;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.note-card.checked {
+  opacity: 0.6;
+}
+
+.note-card.checked .note-content {
+  text-decoration: line-through;
+  color: #666;
+}
+
+/* Footer */
+.note-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+/* Checkbox + label */
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Note buttons */
+.note-card-buttons button {
+  font-size: 14px;
+  padding: 5px 10px;
+  margin-left: 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: #eee;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.note-card-buttons button:hover {
+  background-color: #ddd;
+}
+
+/* Empty Notes */
+.empty-message {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  margin-top: 30px;
+}
+
+/* ✅ Ensure checkboxes show inside the saved note content */
+.note-content input[type="checkbox"] {
+  transform: scale(1.1);
+  margin-right: 6px;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+/* Optional: align checkbox with surrounding text */
+.note-content {
+  display: block;
+  line-height: 1.6;
+  white-space: normal;
+}
+
+/* Optional visual enhancement for saved checklists */
+.note-content li {
+  list-style: none;
+}
+
+.note-content li::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+}

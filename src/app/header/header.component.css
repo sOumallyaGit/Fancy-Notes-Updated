@@ -1,0 +1,24 @@
+*{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #1abc9c, #2ecc71); /* Gradient color */
+  padding: 10px 20px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.navbar-right .profile-name {
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: #34495e;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+
+
